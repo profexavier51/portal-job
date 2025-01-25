@@ -1,4 +1,74 @@
-<x-guest-layout>
+@extends('admin.auth.layouts.auth-master')
+@section('contents')
+<section class="section">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+          <div class="login-brand">
+            <img src="{{ asset('admin/assets/img/logo-agile.jpeg') }}" alt="logo" width="160" style="margin-top: -60px !important" class="shadow-light rounded-circle">
+          </div>
+
+          <div class="card card-primary" style="margin-top: -40px !important">
+            <div class="card-header"><h4>Login</h4></div>
+
+            <div class="card-body">
+               <!-- Session Status -->
+
+               <x-auth-session-status class="mb-4 alert alert-success" style="color:rgb(255, 255, 255);font-weight: bold;margin-top: -40px !important;margin-bottom: 10px !important" :status="session('status')" />
+
+              <form method="POST" action="{{ route('admin.login') }}">
+                @csrf
+                <!-- Email Address -->
+                <div class="form-group" style="margin-top: -30px !important;">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" value="{{ old('email') }}" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" tabindex="1" required autofocus>
+                  <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                </div>
+                <!-- Password -->
+                <div class="form-group">
+                  <div class="d-block">
+                      <label for="password" class="control-label">Password</label>
+                    <div class="float-right">
+                      <a href="{{ route('admin.password.request') }}" class="text-small">
+                        Esqueceu sua senha?
+                      </a>
+                    </div>
+                  </div>
+                  <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" tabindex="2" required>
+                  <div class="invalid-feedback">
+                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                  </div>
+
+                </div>
+                    <!-- Remember Me -->
+                <div class="form-group">
+                  <div class="custom-control custom-checkbox">
+                    <input id="remember-me" type="checkbox" name="remember" class="custom-control-input" tabindex="3" >
+                    <label class="custom-control-label" for="remember-me">Lembrar</label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                    Login
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="simple-footer" style="margin-top: -55px !important; z-index: 999 !important; position: relative;">
+            Copyright &copy; AgileSolutions {{ date('Y') }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+@endsection
+
+
+
+{{-- <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 <h1 style="color: green">ADMIN LOGIN</h1>
@@ -44,4 +114,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
