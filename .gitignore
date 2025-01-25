@@ -5,6 +5,8 @@
 /public/storage
 /storage/*.key
 /vendor
+/resources/views/0_fronend-template
+/resources/views/1_admin-template
 .env
 .env.backup
 .env.production
